@@ -70,7 +70,7 @@
                     data: {
                         action: 'load-posts',
                         nonce: filltering_ajax_vars.nonce,
-                        data: $('form.fillter-ajax-form').serialize(),
+                        fillter: $('form.fillter-ajax-form').serialize(),
                     },
                     dataType: 'json',
                     beforeSend: function() {
