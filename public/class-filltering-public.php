@@ -101,7 +101,7 @@ class Filltering_Public {
 					continue;
 				} elseif ($arg_type == 'query') {
 					$arg_name = $form_key[1];
-					if (in_array($arg_name, $types)) {
+					if (isset($types[$arg_name])) {
 						if ($types[$arg_name] == 'string') {
 							$form_values = strval($form_values);
 						} elseif ($types[$arg_name] == 'integer') {
