@@ -74,7 +74,7 @@ class Filltering_Public {
 
 	}
 
-	public function form_args_handler($serialized){
+	public function form_args_handler($serialized, $formname){
 		$query_args = array(
 			'paged'			=> 1,
 			'post_type'		=> 'post',
@@ -95,6 +95,9 @@ class Filltering_Public {
 					continue;
 				} elseif ($arg_type == 'query') {
 					$arg_name = $form_key[1];
+					if ($arg_name == 'post_type') {
+						$form_values = explode(' ', $form_values);
+					}
 					$query_args[$arg_name] = $form_values;
 				} elseif ($arg_type == 'tax') {
 					$taxonomy = $form_key[1];
@@ -132,6 +135,8 @@ class Filltering_Public {
 			}
 		}
 
+		apply_filters('fillter_post_args'.$formname, $query_args);
+
 		return $query_args;
 	}
 
@@ -143,7 +148,9 @@ class Filltering_Public {
 			die ( 'Nope!' );
 		}
 
-		$query_args = $this->form_args_handler($_REQUEST['fillter']);
+		$formname = ($_REQUEST['name'] ? '_'.$_REQUEST['name'] : '');
+
+		$query_args = $this->form_args_handler($_REQUEST['fillter'], $formname);
 
 		$the_query = new WP_Query( $query_args );
 
@@ -154,10 +161,10 @@ class Filltering_Public {
 		ob_start();
 		if ( $the_query->have_posts() ){
 			while ( $the_query->have_posts() ) { $the_query->the_post();
-				do_action('fillter_post_content');
+				do_action('fillter_post_content'.$formname);
 			}
 		} else {
-			do_action('fillter_post_no_content');
+			do_action('fillter_post_no_content'.$formname);
 		}
 		$posts_html = ob_get_clean();
 

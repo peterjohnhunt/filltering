@@ -9,3 +9,14 @@ Wordpress Ajax Filtering Plugin
 * .fillter-ajax-load
 
 ## Hooks
+* fillter_post_content
+* fillter_post_no_content
+
+
+## Filters
+* fillter_post_args
+
+## Examples
+
+Form Example
+``````

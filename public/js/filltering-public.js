@@ -71,6 +71,7 @@
                         action: 'load-posts',
                         nonce: filltering_ajax_vars.nonce,
                         fillter: $('form.fillter-ajax-form').serialize(),
+                        name: $('form.fillter-ajax-form').attr('action'),
                     },
                     dataType: 'json',
                     beforeSend: function() {
