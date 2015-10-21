@@ -75,6 +75,12 @@ class Filltering_Public {
 	}
 
 	public function form_args_handler($serialized, $formname){
+		$types = array(
+			'post_type' 	=> 'array',
+			'paged' 		=> 'integer',
+			'posts_per_page' => 'integer',
+		);
+
 		$query_args = array(
 			'paged'			=> 1,
 			'post_type'		=> 'post',
@@ -95,12 +101,12 @@ class Filltering_Public {
 					continue;
 				} elseif ($arg_type == 'query') {
 					$arg_name = $form_key[1];
-					if (isset($form_key[2])) {
-						if ($form_key[2] == 'string') {
+					if (in_array($arg_name, $types)) {
+						if ($types[$arg_name] == 'string') {
 							$form_values = strval($form_values);
-						} elseif ($form_key[2] == 'integer') {
+						} elseif ($types[$arg_name] == 'integer') {
 							$form_values = intval($form_values);
-						} elseif ($form_key[2] == 'array') {
+						} elseif ($types[$arg_name] == 'array') {
 							$form_values = explode(' ', $form_values);
 						}
 					}
