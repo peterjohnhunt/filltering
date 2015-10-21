@@ -95,8 +95,14 @@ class Filltering_Public {
 					continue;
 				} elseif ($arg_type == 'query') {
 					$arg_name = $form_key[1];
-					if ($arg_name == 'post_type') {
-						$form_values = explode(' ', $form_values);
+					if (isset($form_key[2])) {
+						if ($form_key[2] == 'string') {
+							$form_values = strval($form_values);
+						} elseif ($form_key[2] == 'integer') {
+							$form_values = intval($form_values);
+						} elseif ($form_key[2] == 'array') {
+							$form_values = explode(' ', $form_values);
+						}
 					}
 					$query_args[$arg_name] = $form_values;
 				} elseif ($arg_type == 'tax') {
