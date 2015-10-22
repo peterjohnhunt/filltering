@@ -160,7 +160,7 @@ class Filltering_Public {
 			die ( 'Nope!' );
 		}
 
-		$formname = ($_REQUEST['name'] ? '_'.$_REQUEST['name'] : '');
+		$formname = (isset($_REQUEST['name']) ? '_'.$_REQUEST['name'] : '');
 
 		$query_args = $this->form_args_handler($_REQUEST['fillter'], $formname);
 
