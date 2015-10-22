@@ -93,6 +93,11 @@
                         }
                     },
                     complete: function() {
+                        var name = 'fillter-successful';
+                        if ($('form.fillter-ajax-form').attr('action')) {
+                            name += '-'+$('form.fillter-ajax-form').attr('action');
+                        }
+                        $('div.fillter-ajax-container').trigger(name);
                         overlayHide();
                     }
                 });
