@@ -74,6 +74,11 @@ class Filltering_Public {
 
 	}
 
+	/**
+	 * ajax form submission argument handler
+	 *
+	 * @since    1.0.0
+	 */
 	public function form_args_handler($serialized, $formname){
 		$types = array(
 			'post_type' 	=> 'array',
@@ -152,6 +157,11 @@ class Filltering_Public {
 		return $query_args;
 	}
 
+	/**
+	 * ajax request handler
+	 *
+	 * @since    1.0.0
+	 */
 	public function load_posts() {
 		$success = true;
 		$posts_remaining = true;
