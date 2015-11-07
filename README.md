@@ -7,32 +7,22 @@ Wordpress Ajax Filtering Plugin
 
 |Classes					|    																		|
 |---------------------------|---------------------------------------------------------------------------|
-|.filltering-holder         | This is the container to hold all overlay and container                   |
-|.fillter-ajax-overlay      | This is the overlay for while the ajax is loading                         |
-|.fillter-ajax-animation    | This is the animation that runs in the overlay while the ajax is loading  |
-|.fillter-ajax-container    | This is the container that receives the posts when ajax is completed      |
-|.fillter-ajax-load         | This is the button that will load more posts                              |
-|.fillter-ajax-form         | This is the container that receives the posts when ajax is completed      |
+|div.filltering	            | This is the container that will hold the posts and the loading overlay    |
+|a.filltering	            | This is the button that will load more posts                              |
+|form.filltering		    | This is the form that holds all the parameters to filter by		        |
 
 #### Examples
 
-AJAX HTML Loading, Container, and Load More
+AJAX HTML Container
 ```
-<div class="filltering-holder">
-	<div class="fillter-ajax-overlay">
-		<div class="fillter-ajax-animation"></div>
-	</div>
-	<div class="fillter-ajax-container">
-        <!-- Where the posts will be appended -->
-	</div>
-    <a class="button fillter-ajax-load">load more</a>
+<div class="filltering">
 </div>
 ```
 
 
 AJAX HTML Form to customize WP Query
 ```
-<form class="fillter-ajax-form" action="portfolio" method="post">
+<form class="filltering" action="unique_action_name" method="post">
 	<input type="hidden" name="query-post_type" value="custom_post_type">
 	<input type="hidden" name="query-post_status" value="publish">
 	<input type="hidden" name="query-posts_per_page" value="6">
@@ -53,7 +43,7 @@ AJAX HTML Form to customize WP Query
 
 fillter_post_content
 ```
-add_action('fillter_post_content', 'post_type_content');
+add_action('fillter_post_content_unique_action_name', 'post_type_content');
 function post_type_content() {
 	get_template_part('content', 'post-type');
 }
@@ -61,7 +51,7 @@ function post_type_content() {
 
 fillter_post_no_content
 ```
-add_action('fillter_post_no_content', 'post_type_no_content');
+add_action('fillter_post_no_content_unique_action_name', 'post_type_no_content');
 function post_type_no_content() {
 	echo '<p>No Posts To Display</p>';
 }
@@ -75,7 +65,7 @@ function post_type_no_content() {
 
 fillter_post_args
 ```
-add_filter( 'fillter_post_args', 'post_type_query_args', 10, 1);
+add_filter( 'fillter_post_args_unique_action_name', 'post_type_query_args', 10, 1);
 function post_type_query_args($args){
 
 	// Modify query args
@@ -94,7 +84,7 @@ function post_type_query_args($args){
 
 #### Examples
 ```
-$('div.fillter-ajax-container').on('fillter-successful', function(){
+$('div.filltering').on('fillter-successful-unique-action-name', function(){
 
 	// Manipulate Appended Items, or bind JS to items
 
