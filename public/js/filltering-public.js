@@ -1,157 +1,168 @@
 /*░░░░░░░░░░░░░░░░░░░░░░░░
 
-  JavaScript DIRECTORY
+  STYLE DIRECTORY
 
-    _functions
-        _container
-            _containerEmpty
-            _containerAppend
-        _overlay
-            _overlayShow
-            _overlayHide
-        _ajax
-            _ajaxLoad
-            _ajaxLoadShow
-            _ajaxLoadHide
-            _ajaxNextPage
-            _ajaxResetPage
-    _runtime
-        _onFormSubmit
-        _onLoadClick
+	_Variable_Declarations
 
   ░░░░░░░░░░░░░░░░░░░░░░░░*/
-
-/* global filltering_ajax_vars */
-/* global console */
-
 (function($) {
-    'use strict';
+	'use strict';
 
-    //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-    // _functions
-    //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+	var FiLLTering = function() {
 
-        // _container
-        //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+		//▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+		// _Variable_Declarations
+		//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+		var $form 			= $('form.filltering'),
+			$container 		= $('div.filltering'),
+			$loadmore 		= $('a.filltering'),
+			$formElements	= $('form.filltering *'),
+			$submit 		= $form.find('input[type="submit"]'),
+			$page			= $form.find('input[name="query-paged"]'),
+			formValues		= $form.serialize(),
+			name 			= $form.attr('action'),
+			page 			= 1;
 
-            // _containerEmpty
-            function containerEmpty() {
-                $('div.fillter-ajax-container').empty();
-            }
+		/**
+		* Since the form is the default state,
+		* disable submit till the form has changed
+		**/
+		$submit.attr('disabled', true);
 
-            // _containerAppend
-            function containerAppend(html) {
-                $('div.fillter-ajax-container').append(html);
-            }
+		/**
+		* if query-paged input is on the page,
+		* sync the value with our pagenumber variable
+		**/
+		if ($page[0]) {
+			page = parseInt($page.val(), 10);
+		}
 
-        // _overlay
-        //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+		/**
+		* If the container is not empty,
+		* get whether we have additional posts
+		* and show or hide loadmore button accordingly
+		**/
+		if ($container.children()[0]) {
+			$.ajax({
+				type: 'POST',
+				url: filltering_ajax_vars.url,
+				data: {
+					action: 'filltering',
+					nonce: filltering_ajax_vars.nonce,
+					values: formValues,
+					name: name,
+					page: page,
+				},
+				dataType: 'json',
+				success: function( result ) {
+					if (result.success) {
+						result.posts_remaining ? $loadmore.show() : $loadmore.hide();
+					}
+				},
+			});
+		}
+		/**
+		* Otherwise, do an inital ajax request
+		**/
+		else {
+			sendAjax({reload: true});
+		}
 
-            // _overlayShow
-            function overlayShow() {
-                $('div.fillter-ajax-overlay').show();
-            }
-
-            // _overlayHide
-            function overlayHide() {
-                $('div.fillter-ajax-overlay').hide();
-            }
-
-        // _ajax
-        //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-
-            // _ajaxLoad
-            function ajaxLoad(emptyFirst) {
-                emptyFirst = typeof emptyFirst !== 'undefined' ? emptyFirst : false;
-
-                $.ajax({
-                    type: "post",
-                    url: filltering_ajax_vars.url,
-                    data: {
-                        action: 'load-posts',
-                        nonce: filltering_ajax_vars.nonce,
-                        fillter: $('form.fillter-ajax-form').serialize(),
-                        name: $('form.fillter-ajax-form').attr('action'),
-                    },
-                    dataType: 'json',
-                    beforeSend: function() {
-                        overlayShow();
-                    },
-                    success: function(result) {
-                        if (result.success) {
-                            if (emptyFirst) {
-                                containerEmpty();
-                            }
-                            containerAppend(result.posts_html);
-                            if (result.posts_remaining) {
-                                ajaxLoadShow();
-                            } else {
-                                ajaxLoadHide();
-                            }
-                        } else {
-                            console.log('Fillter - Error Calling AJAX Function');
-                        }
-                    },
-                    complete: function() {
-                        var name = 'fillter-successful';
-                        if ($('form.fillter-ajax-form').attr('action')) {
-                            name += '-'+$('form.fillter-ajax-form').attr('action');
-                        }
-                        $('div.fillter-ajax-container').trigger(name);
-                        overlayHide();
-                    }
-                });
-            }
-
-            // _ajaxLoadShow
-            function ajaxLoadShow() {
-                $('a.fillter-ajax-load').show();
-            }
-
-            // _ajaxLoadHide
-            function ajaxLoadHide() {
-                $('a.fillter-ajax-load').hide();
-            }
-
-            // _ajaxNextPage
-            function ajaxNextPage() {
-                if ($('form.fillter-ajax-form input[name="query-paged"]').length > 0) {
-                    var current_val = parseInt($('form.fillter-ajax-form input[name="query-paged"]').val(), 10);
-                    $('form.fillter-ajax-form input[name="query-paged"]').val(current_val+1);
-                } else {
-                    $('form.fillter-ajax-form').prepend('<input type="hidden" name="query-paged" value="2">');
-                }
-            }
-
-            // _ajaxResetPage
-            function ajaxResetPage() {
-                if ($('form.fillter-ajax-form input[name="query-paged"]').length > 0) {
-                    $('form.fillter-ajax-form input[name="query-paged"]').val(1);
-                } else {
-                    $('form.fillter-ajax-form').prepend('<input type="hidden" name="query-paged" value="1">');
-                }
-            }
-
-    //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-    // _runtime
-    //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-    $(function() {
-        ajaxLoad();
-
-        // _onFormSubmit
-    	$('form.fillter-ajax-form').submit(function(event) {
+		/**
+		* when the filtering form is submitted,
+		* disable normal submission and send ajax request
+		* pass in reload so that the container will be emptied
+		* prior to new data being appended
+		**/
+		$form.submit(function(event) {
     		event.preventDefault();
-            ajaxResetPage();
-    		ajaxLoad(true);
+			sendAjax({reload: true});
     	});
 
-        // _onLoadClick
-    	$('a.fillter-ajax-load').click(function(event) {
+		/**
+		* when load more button is clicked
+		* load more posts without clearing
+		* the current contents of the container
+		**/
+		$loadmore.click(function(event) {
     		event.preventDefault();
-            ajaxNextPage();
-    		ajaxLoad();
+			sendAjax({reload: false});
     	});
 
-    });
+		/**
+		* on any element in the form that is altered
+		* check to see if we have new form data
+		* and enable or disable the submit button accordingly
+		**/
+		$formElements.on('change keyup paste', function() {
+			if (formValues === $form.serialize()) {
+				$submit.attr('disabled', true);
+			} else {
+				$submit.removeAttr('disabled');
+			}
+        });
+
+		/**
+		* this is our primary ajax sender
+		**/
+		function sendAjax(options){
+			// save as current form data for checking against
+			formValues = $form.serialize();
+
+			// form is being submitted and shouldn't be submitted again unless changed are made so disable submit button
+			$submit.attr('disabled', true);
+
+			// if data is not being cleared, increment page we are on, otherwise reset
+			page = (options.reload ? 1 : page + 1);
+
+			// sync our current page with paged input if it exists
+			if ($page[0]) {
+				$page.val(page);
+			}
+
+			// start ajax call
+			$.ajax({
+				type: 'POST',
+				url: filltering_ajax_vars.url,
+				data: {
+					action: 'filltering',
+					nonce: filltering_ajax_vars.nonce,
+					values: formValues,
+					name: name,
+					page: page,
+				},
+				dataType: 'json',
+				beforeSend: function( xhr ) {
+					// append our loading animation
+					$container.prepend('<span class="filltering"><i class="filltering"></i></span>');
+				},
+				success: function( result ) {
+					if (result.success) {
+						// if data should be cleared, empty our container
+						if (options.reload) {
+							$container.empty();
+						}
+
+						// append all returned data
+						$container.append(result.posts_html)
+
+						// if more posts remain, show or hide loadmore button accordingly
+						result.posts_remaining ? $loadmore.show() : $loadmore.hide();
+					}
+				},
+				complete: function( xhr, status ) {
+					// now that we are complete, remove loading animation
+					$container.find('span.filltering').remove();
+
+					// fire a trigger to be tapped into to modify or interact with ajax pulled in content
+					var successTrigger = 'fillter-successful' + (name ? '-' + name : '');
+					$container.trigger(successTrigger);
+				}
+			});
+		}
+
+	}
+
+	FiLLTering();
 
 })(jQuery);

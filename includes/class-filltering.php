@@ -148,8 +148,8 @@ class Filltering {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-		$this->loader->add_action( 'wp_ajax_load-posts', $plugin_public, 'load_posts' );
-		$this->loader->add_action( 'wp_ajax_nopriv_load-posts', $plugin_public, 'load_posts' );
+		$this->loader->add_action( 'wp_ajax_filltering', $plugin_public, 'filltering' );
+		$this->loader->add_action( 'wp_ajax_nopriv_filltering', $plugin_public, 'filltering' );
 
 	}
 

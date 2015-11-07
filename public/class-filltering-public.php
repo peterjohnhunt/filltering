@@ -69,7 +69,7 @@ class Filltering_Public {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/min/filltering-public-min.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/min/filltering-public-min.js', array( 'jquery' ), $this->version, true );
 		wp_localize_script( $this->plugin_name, 'filltering_ajax_vars', array('url' => admin_url( 'admin-ajax.php' ),'nonce' => wp_create_nonce( 'ajax-nonce' )));
 
 	}
@@ -79,7 +79,8 @@ class Filltering_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function form_args_handler($serialized, $formname){
+	public function filltering_args_parser($serialized, $page, $formname){
+
 		$types = array(
 			'post_type' 	=> 'array',
 			'paged' 		=> 'integer',
@@ -87,7 +88,7 @@ class Filltering_Public {
 		);
 
 		$query_args = array(
-			'paged'			=> 1,
+			'paged'			=> $page,
 			'post_type'		=> 'post',
 			'order'			=> 'ASC',
 			'orderby'		=> 'menu_order title',
@@ -162,7 +163,7 @@ class Filltering_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function load_posts() {
+	public function filltering() {
 		$success = true;
 		$posts_remaining = true;
 		$nonce = $_POST['nonce'];
@@ -170,9 +171,9 @@ class Filltering_Public {
 			die ( 'Nope!' );
 		}
 
-		$formname = (isset($_REQUEST['name']) ? '_'.$_REQUEST['name'] : '');
+		$formname = ($_REQUEST['name'] ? '_'.$_REQUEST['name'] : '');
 
-		$query_args = $this->form_args_handler($_REQUEST['fillter'], $formname);
+		$query_args = $this->filltering_args_parser($_REQUEST['values'], $_REQUEST['page'], $formname);
 
 		$the_query = new WP_Query( $query_args );
 
