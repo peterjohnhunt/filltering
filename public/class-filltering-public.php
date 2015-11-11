@@ -176,7 +176,7 @@ class Filltering_Public {
 
 		$the_query = new WP_Query( $query_args );
 
-		if ($the_query->max_num_pages == $query_args['paged']) {
+		if ($the_query->max_num_pages <= $query_args['paged']) {
 			$posts_remaining = false;
 		}
 
