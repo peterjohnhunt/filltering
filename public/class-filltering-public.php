@@ -153,7 +153,7 @@ class Filltering_Public {
 			}
 		}
 
-		apply_filters('fillter_post_args'.$formname, $query_args);
+		$query_args = apply_filters('fillter_post_args'.$formname, $query_args);
 
 		return $query_args;
 	}
