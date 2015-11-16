@@ -11,7 +11,7 @@
   ░░░░░░░░░░░░░░░░░░░░░░░░*/
 div.filltering {
   position: relative;
-  min-height: 200px; }
+  min-height: 100px; }
   div.filltering span.filltering {
     position: absolute;
     height: 100%;
@@ -39,7 +39,7 @@ div.filltering {
       animation: rotate 1s linear infinite; }
 
 a.filltering {
-  display: none; }
+  display: none !important; }
 
 @keyframes rotate {
   0% {
