@@ -171,7 +171,7 @@ class Filltering_Public {
 			die ( 'Nope!' );
 		}
 
-		$formname = ($_REQUEST['name'] ? '_'.$_REQUEST['name'] : '');
+		$formname = ((isset($_REQUEST['name']) && $_REQUEST['name']) ? '_'.$_REQUEST['name'] : '');
 
 		$query_args = $this->filltering_args_parser($_REQUEST['values'], $_REQUEST['page'], $formname);
 
