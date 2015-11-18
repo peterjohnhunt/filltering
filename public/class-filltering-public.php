@@ -120,7 +120,7 @@ class Filltering_Public {
 				} elseif ($arg_type == 'tax') {
 					$taxonomy = $form_key[1];
 					$field = $form_key[2];
-					if ($field = 'term_id') {
+					if ($field == 'term_id') {
 						$form_values = implode(',', $form_values);
 						$form_values = json_decode('[' . $form_values . ']', true);
 					}
@@ -138,7 +138,7 @@ class Filltering_Public {
 					$query_args['meta_query'][$meta_key]['relation'] = $meta_relation;
 					foreach ($form_values as $values) {
 						$values = explode('+', $values);
-						if ($meta_type = 'numeric') {
+						if ($meta_type == 'numeric') {
 							$values = implode(',', $values);
 							$values = json_decode('[' . $values . ']', true);
 						}
