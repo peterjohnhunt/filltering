@@ -121,8 +121,12 @@ class Filltering_Public {
 					$taxonomy = $form_key[1];
 					$field = $form_key[2];
 					if ($field == 'term_id') {
-						$form_values = implode(',', $form_values);
-						$form_values = json_decode('[' . $form_values . ']', true);
+						if (is_array($form_values)) {
+							$form_values = implode(',', $form_values);
+							$form_values = json_decode('[' . $form_values . ']', true);
+						} else {
+							$form_values = intval($form_values);
+						}
 					}
 					$query_args['tax_query'][] = array(
 						'taxonomy' => $taxonomy,

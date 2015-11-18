@@ -142,7 +142,7 @@
 			beforeSend: function( xhr ) {
 				// append our loading animation
 				ajaxRunning = true;
-				$container.prepend('<span class="filltering"><i class="filltering"></i></span>');
+				$container.append('<span class="filltering"><i class="filltering"></i></span>');
 			},
 			success: function( result ) {
 				if (result.success) {
