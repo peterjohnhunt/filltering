@@ -31,6 +31,11 @@
 		var dataName = (name ? '[data-action="'+name+'"]' : ':not([data-action])');
 
 		/**
+		* Trigger Name if specified
+		**/
+		var triggerName	= (name ? '-' + name : '');
+
+		/**
 		* Container and Loadmore Button Elements
 		**/
 		var $container 		= $('div.filltering'+dataName),
@@ -49,6 +54,7 @@
 		**/
 		$submit.attr('disabled', true);
 		$loadmore.hide();
+		$form.trigger('fillter-initialized' + triggerName);
 
 		/**
 		* if query-paged input is on the page,
@@ -164,6 +170,11 @@
 				beforeSend: function( xhr ) {
 					// append our loading animation
 					ajaxRunning = true;
+
+					// fire a trigger on ajax started
+					$form.trigger('fillter-started' + triggerName);
+
+					// Append the loading animation
 					$container.append('<span class="filltering"><i class="filltering"></i></span>');
 				},
 				success: function( result ) {
@@ -190,8 +201,7 @@
 					$container.find('span.filltering').remove();
 
 					// fire a trigger to be tapped into to modify or interact with ajax pulled in content
-					var successTrigger = 'fillter-successful' + (name ? '-' + name : '');
-					$container.trigger(successTrigger);
+					$form.trigger('fillter-successful' + triggerName);
 				}
 			});
 		}

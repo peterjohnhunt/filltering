@@ -188,17 +188,48 @@ return $args;
 	<td style="text-align:left;">fillter-successful</td>
 	<td style="text-align:left;">On Ajax Appended</td>
 </tr>
+<tr>
+	<td style="text-align:left;">fillter-started</td>
+	<td style="text-align:left;">On Ajax Started</td>
+</tr>
+<tr>
+	<td style="text-align:left;">fillter-initialized</td>
+	<td style="text-align:left;">On Form Initialized</td>
+</tr>
 </tbody>
 </table>
 
 <h4 id="examples">Examples</h4>
 
-<pre><code>$('div.filltering').on('fillter-successful-unique-action-name', function(){
+<p>fillter-initialized
+```
+$(&#8216;form.filltering&#8217;).on(&#8216;fillter-initialized-unique-action-name&#8217;, function(){</p>
 
-    // Manipulate Appended Items, or bind JS to items
-
-});
+<pre><code>// Run custom code
 </code></pre>
+
+<p>});
+```</p>
+
+<p>fillter-started
+```
+$(&#8216;form.filltering&#8217;).on(&#8216;fillter-started-unique-action-name&#8217;, function(){</p>
+
+<pre><code>// Run custom code
+</code></pre>
+
+<p>});
+```</p>
+
+<p>fillter-successful
+```
+$(&#8216;form.filltering&#8217;).on(&#8216;fillter-successful-unique-action-name&#8217;, function(){</p>
+
+<pre><code>// Manipulate Appended Items, or bind JS to items
+</code></pre>
+
+<p>});
+```</p>
 
 <hr />
 

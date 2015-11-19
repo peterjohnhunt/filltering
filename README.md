@@ -103,10 +103,32 @@ function post_type_query_args($args){
 |Events				|				|
 |-------------------|---------------|
 |fillter-successful |On Ajax Appended|
+|fillter-started 	|On Ajax Started|
+|fillter-initialized|On Form Initialized|
 
 #### Examples
+
+fillter-initialized
 ```
-$('div.filltering').on('fillter-successful-unique-action-name', function(){
+$('form.filltering').on('fillter-initialized-unique-action-name', function(){
+
+	// Run custom code
+
+});
+```
+
+fillter-started
+```
+$('form.filltering').on('fillter-started-unique-action-name', function(){
+
+	// Run custom code
+
+});
+```
+
+fillter-successful
+```
+$('form.filltering').on('fillter-successful-unique-action-name', function(){
 
 	// Manipulate Appended Items, or bind JS to items
 
