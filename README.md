@@ -1,6 +1,11 @@
 # FiLLTering Plugin
 Wordpress Ajax Filtering Plugin - Version 3
 
+New:
+- Works for multiple separate forms on the same page
+
+***
+### Quick Links
 * [HTML](#html)
 	* [Classes](#html-classes-needed)
 	* [Examples](#html-examples)
@@ -14,9 +19,7 @@ Wordpress Ajax Filtering Plugin - Version 3
 * [CSS](#css)
 	* [Examples](#css-examples)
 
-New:
-* Works for multiple separate forms on the same page
-
+***
 
 ## HTML
 
