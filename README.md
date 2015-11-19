@@ -31,6 +31,19 @@ AJAX HTML Form to customize WP Query
 	<input type="hidden" name="query-order" value="DESC">
 </form>
 ```
+
+Form input name Examples
+```
+<input type="hidden" name="query-post_type" value="post">
+<input type="text" name="query-s" value="">
+<input type="checkbox" name="tax-category-slug" value="uncategorized">
+<input type="checkbox" name="meta_query-color" value="blue">
+<select name="tax-category-term_id">
+	<option value="1">Category 1</option>
+	<option value="2">Category 2</option>
+	<option value="3">Category 3</option>
+</select>
+```
 ***
 
 ## PHP
