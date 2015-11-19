@@ -2,17 +2,17 @@
 Wordpress Ajax Filtering Plugin - Version 3
 
 * [HTML](#html)
-	* [Classes](#htmlclassesneeded)
-	* [Examples](#htmlexamples)
+	* [Classes](#html-classes-needed)
+	* [Examples](#html-examples)
 * [PHP](#php)
-	* [Hooks](#phphooks)
-		* [Examples](#phphookexamples)
+	* [Hooks](#php-hooks)
+		* [Examples](#php-hook-examples)
 	* [Filters](#filters)
-		* [Filter Examples](#phpfilterexamples)
+		* [Filter Examples](#php-filter-examples)
 * [JavaScript](#javascript)
-	* [Examples](#javascriptexamples)
+	* [Examples](#javascript-examples)
 * [CSS](#css)
-	* [Examples](#cssexamples)
+	* [Examples](#css-examples)
 
 New:
 * Works for multiple separate forms on the same page
