@@ -136,3 +136,18 @@ $('form.filltering').on('fillter-successful-unique-action-name', function(){
 ```
 
 ***
+
+## CSS
+
+|Classes			|				|
+|-------------------|---------------|
+|i.filltering 		|border-top color|
+
+#### Examples
+i.filltering
+```
+i.filltering {
+	border-top-color: #fff !important;
+}
+```
+***
