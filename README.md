@@ -4,19 +4,13 @@ Wordpress Ajax Filtering Plugin - Version 3
 * [HTML](#html)
 	* [Classes](#htmlclassesneeded)
 	* [Examples](#htmlexamples)
-
-
 * [PHP](#php)
 	* [Hooks](#phphooks)
 		* [Examples](#phphookexamples)
 	* [Filters](#filters)
 		* [Filter Examples](#phpfilterexamples)
-
-
 * [JavaScript](#javascript)
 	* [Examples](#javascriptexamples)
-
-
 * [CSS](#css)
 	* [Examples](#cssexamples)
 
