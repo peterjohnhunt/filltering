@@ -27,6 +27,7 @@
 	* disable submit till the form has changed
 	**/
 	$submit.attr('disabled', true);
+	$loadmore.hide();
 
 	/**
 	* if query-paged input is on the page,

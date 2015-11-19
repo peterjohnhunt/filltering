@@ -39,7 +39,7 @@ div.filltering {
       animation: rotate 1s linear infinite; }
 
 a.filltering {
-  display: none !important; }
+  display: none; }
 
 @keyframes rotate {
   0% {
