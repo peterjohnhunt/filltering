@@ -1,12 +1,32 @@
 # FiLLTering Plugin
 Wordpress Ajax Filtering Plugin - Version 3
 
+* [HTML](#html)
+	* [Classes](#htmlclassesneeded)
+	* [Examples](#htmlexamples)
+
+
+* [PHP](#php)
+	* [Hooks](#phphooks)
+		* [Examples](#phphookexamples)
+	* [Filters](#filters)
+		* [Filter Examples](#phpfilterexamples)
+
+
+* [JavaScript](#javascript)
+	* [Examples](#javascriptexamples)
+
+
+* [CSS](#css)
+	* [Examples](#cssexamples)
+
 New:
 * Works for multiple separate forms on the same page
 
 
 ## HTML
-### Classes Needed
+
+### HTML Classes Needed
 
 |Classes					|    																		|
 |---------------------------|---------------------------------------------------------------------------|
@@ -14,7 +34,7 @@ New:
 |a.filltering	            | This is the button that will load more posts                              |
 |form.filltering		    | This is the form that holds all the parameters to filter by		        |
 
-#### Examples
+#### HTML Examples
 
 AJAX HTML Form to customize WP Query
 ```
@@ -56,12 +76,15 @@ Form input name Examples
 ***
 
 ## PHP
+
+### PHP Hooks
+
 |Hooks					|								|
 |-----------------------|-------------------------------|
 |fillter_post_content	| Ajax Loop Post Content Action |
 |fillter_post_no_content| Ajax Loop No Posts Content 	|
 
-#### Examples
+#### PHP Hook Examples
 
 fillter_post_content
 ```
@@ -83,7 +106,9 @@ function post_type_no_content() {
 |-------------------|-----------------------|
 |fillter_post_args  | Modify WP Query Args  |
 
-#### Examples
+### PHP Filters
+
+#### PHP Filter Examples
 
 fillter_post_args
 ```
@@ -106,7 +131,7 @@ function post_type_query_args($args){
 |fillter-started 	|On Ajax Started|
 |fillter-initialized|On Form Initialized|
 
-#### Examples
+#### JavaScript Examples
 
 fillter-initialized
 ```
@@ -143,7 +168,7 @@ $('form.filltering').on('fillter-successful-unique-action-name', function(){
 |-------------------|---------------|
 |i.filltering 		|border-top color|
 
-#### Examples
+#### CSS Examples
 i.filltering
 ```
 i.filltering {
