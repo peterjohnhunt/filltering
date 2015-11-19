@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h1 id="fillteringplugin">FiLLTering Plugin</h1>
+
+<p>Wordpress Ajax Filtering Plugin - Version 3</p>
+
+<p>New:
+* Works for multiple separate forms on the same page</p>
+
+<h2 id="html">HTML</h2>
+
+<h3 id="classesneeded">Classes Needed</h3>
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Classes</th>
+	<th style="text-align:left;"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">div.filltering</td>
+	<td style="text-align:left;">This is the container that will hold the posts and the loading overlay</td>
+</tr>
+<tr>
+	<td style="text-align:left;">a.filltering</td>
+	<td style="text-align:left;">This is the button that will load more posts</td>
+</tr>
+<tr>
+	<td style="text-align:left;">form.filltering</td>
+	<td style="text-align:left;">This is the form that holds all the parameters to filter by</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="examples">Examples</h4>
+
+<p>AJAX HTML Form to customize WP Query
+<code>
+&lt;form class=&quot;filltering&quot; action=&quot;unique_action_name&quot; method=&quot;post&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;query-post_type&quot; value=&quot;custom_post_type&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;query-post_status&quot; value=&quot;publish&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;query-posts_per_page&quot; value=&quot;6&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;query-paged&quot; value=&quot;1&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;query-orderby&quot; value=&quot;menu_order title&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;query-order&quot; value=&quot;DESC&quot;&gt;
+&lt;/form&gt;
+</code></p>
+
+<p>AJAX HTML Container
+<code>
+&lt;div class=&quot;filltering&quot; data-action=&quot;unique_action_name&quot;&gt;
+&lt;/div&gt;
+</code></p>
+
+<p>AJAX HTML Load More Button
+<code>
+&lt;a href=&quot;#&quot; class=&quot;filltering&quot; data-action=&quot;unique_action_name&quot;&gt;
+&lt;/a&gt;
+</code>
+***</p>
+
+<p>Form input name Examples
+<code>
+&lt;input type=&quot;hidden&quot; name=&quot;query-post_type&quot; value=&quot;post&quot;&gt;
+&lt;input type=&quot;text&quot; name=&quot;query-s&quot; value=&quot;&quot;&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;tax-category-slug&quot; value=&quot;uncategorized&quot;&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;meta_query-color&quot; value=&quot;blue&quot;&gt;
+&lt;select name=&quot;tax-category-term_id&quot;&gt;
+    &lt;option value=&quot;1&quot;&gt;Category 1&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Category 2&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Category 3&lt;/option&gt;
+&lt;/select&gt;
+</code>
+***</p>
+
+<h2 id="php">PHP</h2>
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Hooks</th>
+	<th style="text-align:left;"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">fillter_post_content</td>
+	<td style="text-align:left;">Ajax Loop Post Content Action</td>
+</tr>
+<tr>
+	<td style="text-align:left;">fillter_post_no_content</td>
+	<td style="text-align:left;">Ajax Loop No Posts Content</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="examples">Examples</h4>
+
+<p>fillter_post_content
+<code>
+add_action('fillter_post_content_unique_action_name', 'post_type_content');
+function post_type_content() {
+    get_template_part('content', 'post-type');
+}
+</code></p>
+
+<p>fillter_post_no_content
+<code>
+add_action('fillter_post_no_content_unique_action_name', 'post_type_no_content');
+function post_type_no_content() {
+    echo '&lt;p&gt;No Posts To Display&lt;/p&gt;';
+}
+</code></p>
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Filters</th>
+	<th style="text-align:left;"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">fillter_post_args</td>
+	<td style="text-align:left;">Modify WP Query Args</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="examples">Examples</h4>
+
+<p>fillter_post_args
+```
+add_filter( &#8216;fillter_post_args_unique_action_name&#8217;, &#8216;post_type_query_args&#8217;, 10, 1);
+function post_type_query_args($args){</p>
+
+<pre><code>// Modify query args
+
+return $args;
+</code></pre>
+
+<p>}
+```</p>
+
+<hr />
+
+<h2 id="javascript">JavaScript</h2>
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Events</th>
+	<th style="text-align:left;"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">fillter-successful</td>
+	<td style="text-align:left;">On Ajax Appended</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="examples">Examples</h4>
+
+<pre><code>$('div.filltering').on('fillter-successful-unique-action-name', function(){
+
+    // Manipulate Appended Items, or bind JS to items
+
+});
+</code></pre>
+
+<hr />
+
+</body>
+</html>

@@ -82,9 +82,9 @@ class Filltering_Public {
 	public function filltering_args_parser($serialized, $page, $formname){
 
 		$types = array(
-			'post_type' 	=> 'array',
-			'paged' 		=> 'integer',
-			'posts_per_page' => 'integer',
+			'post_type' 		=> 'array',
+			'paged' 			=> 'integer',
+			'posts_per_page' 	=> 'integer',
 		);
 
 		$query_args = array(

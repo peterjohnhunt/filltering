@@ -1,5 +1,8 @@
 # FiLLTering Plugin
-Wordpress Ajax Filtering Plugin
+Wordpress Ajax Filtering Plugin - Version 3
+
+New:
+* Works for multiple separate forms on the same page
 
 
 ## HTML
@@ -13,13 +16,6 @@ Wordpress Ajax Filtering Plugin
 
 #### Examples
 
-AJAX HTML Container
-```
-<div class="filltering">
-</div>
-```
-
-
 AJAX HTML Form to customize WP Query
 ```
 <form class="filltering" action="unique_action_name" method="post">
@@ -31,6 +27,19 @@ AJAX HTML Form to customize WP Query
 	<input type="hidden" name="query-order" value="DESC">
 </form>
 ```
+
+AJAX HTML Container
+```
+<div class="filltering" data-action="unique_action_name">
+</div>
+```
+
+AJAX HTML Load More Button
+```
+<a href="#" class="filltering" data-action="unique_action_name">
+</a>
+```
+***
 
 Form input name Examples
 ```
