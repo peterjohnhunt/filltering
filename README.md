@@ -1,7 +1,7 @@
 # FiLLTering Plugin
 Wordpress Ajax Filtering Plugin - Version 3
 
-New:
+New in version 3:
 - Works for multiple separate forms on the same page
 
 ***
