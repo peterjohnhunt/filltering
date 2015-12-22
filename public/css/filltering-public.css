@@ -10,8 +10,7 @@
 
   ░░░░░░░░░░░░░░░░░░░░░░░░*/
 div.filltering {
-  position: relative;
-  min-height: 100px; }
+  position: relative; }
   div.filltering span.filltering {
     position: absolute;
     height: 100%;

@@ -42,7 +42,7 @@
 			/**
 			* Container and Loadmore Button Elements
 			**/
-			var $container 		= $('div.filltering'+dataName),
+			var $container 		= $('div.filltering'+dataName+', tbody.filltering'+dataName+''),
 				$loadmore 		= $('a.filltering'+dataName);
 
 			/**
