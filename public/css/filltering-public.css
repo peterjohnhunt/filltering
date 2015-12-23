@@ -9,9 +9,9 @@
     _animationDeclarations
 
   ░░░░░░░░░░░░░░░░░░░░░░░░*/
-div.filltering {
+div.filltering, tbody.filltering {
   position: relative; }
-  div.filltering span.filltering {
+  div.filltering span.filltering, tbody.filltering span.filltering {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -19,7 +19,7 @@ div.filltering {
     left: 0;
     z-index: 5;
     background-color: rgba(255, 255, 255, 0.5); }
-    div.filltering span.filltering i.filltering {
+    div.filltering span.filltering i.filltering, tbody.filltering span.filltering i.filltering {
       border-bottom: 10px solid rgba(0, 0, 0, 0.3);
       border-left: 10px solid rgba(0, 0, 0, 0.3);
       border-right: 10px solid rgba(0, 0, 0, 0.3);

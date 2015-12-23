@@ -137,9 +137,12 @@ class Filltering_Public {
 					$meta_key = $form_key[1];
 					$meta_relation = isset($form_key[2]) ? $form_key[2] : 'AND';
 					$meta_type = isset($form_key[3]) ? $form_key[3] : 'CHAR';
-					$meta_compare = isset($form_key[4]) ? $form_key[4] : '=';
+					$meta_compare = isset($form_key[4]) ? $form_key[4] : 'IN';
 					$query_args['meta_query'][$meta_key] = array();
 					$query_args['meta_query'][$meta_key]['relation'] = $meta_relation;
+					if (!is_array($form_values)) {
+						$form_values = explode("+", $form_values);
+					}
 					foreach ($form_values as $values) {
 						$values = explode('+', $values);
 						if ($meta_type == 'numeric') {
@@ -197,7 +200,7 @@ class Filltering_Public {
 			}
 
 			do_action('after_fillter_post_content'.$formname, $formname);
-			
+
 		} else {
 			do_action('fillter_post_no_content'.$formname, $formname);
 		}
